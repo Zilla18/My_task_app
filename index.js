@@ -35,10 +35,26 @@ function displayAllTask() {
   for (let i = 0; i < allMyTasks.length; i++) {
     taskElements.push(`<li class="p-2 flex justify-between">
           <span>${allMyTasks[i].task}</span>
-          <button class="bg-red-400 text-white rouded-md text-sm p-1">
+          <button onclick="deleteTask(${allMyTasks[i].taskId})" class="bg-red-400 text-white rouded-md text-sm p-1">
             Delete
           </button>
         </li>`);
   }
   TASK_LIST_CONTAINER.innerHTML = taskElements.join("");
+}
+
+function deleteTask(taskId) {
+  let updatedTask = [];
+  console.log(taskId);
+
+  for (let i = 0; i < allMyTasks.length; i++) {
+    if (allMyTasks[i].taskId !== taskId) {
+      updatedTask.push(allMyTasks[i]);
+    }
+  }
+
+  //   re-assign allMyTaskArray to the updated task array
+  allMyTasks = updatedTask;
+  // call the displayAllTask function to display all the newly updated array
+  displayAllTask();
 }
